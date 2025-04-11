@@ -55,7 +55,11 @@ const setEnv = (name, value) => {
 const getInput = (name, required) => {
 	const value = getEnv(`INPUT_${name}`);
 	if (required && !value) {
-		exit(`"${name}" input variable is not defined`);
+		if (name === "GITHUB_TOKEN" && (process.env.GITHUB_TOKEN || process.env.INPUT_GITHUB_TOKEN)) {
+			value = process.env.GITHUB_TOKEN || process.env.INPUT_GITHUB_TOKEN;
+		} if (!value) {
+			exit(`"${name}" input variable is not defined`);
+		}
 	}
 	return value;
 };

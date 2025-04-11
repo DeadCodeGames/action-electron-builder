@@ -6,6 +6,7 @@ inputs:
   github_token:
     description: GitHub authentication token
     required: true
+    default: ${{github.token}}
   mac_certs:
     description: Base64-encoded code signing certificate for macOS
     required: false
