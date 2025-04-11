@@ -52,6 +52,11 @@ inputs:
     description: Directory where `electron-builder` commands should be run
     required: false
 
+  # DeadCode Options
+  skip_install:
+    description: Whether to skip installing dependencies (useful for when you're doing it yourself, and/or need --force)
+    required: false
+
 runs:
   using: node12
   main: index.js
