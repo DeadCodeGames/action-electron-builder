@@ -72,6 +72,7 @@ const runAction = () => {
 	const release = getInput("release", true) === "true";
 	const pkgRoot = getInput("package_root", true);
 	const buildScriptName = getInput("build_script_name", true);
+	const buildScriptEnv = getInput("build_script_env", true);
 	const skipBuild = getInput("skip_build") === "true";
 	const useVueCli = getInput("use_vue_cli") === "true";
 	const args = getInput("args") || "";
@@ -119,6 +120,12 @@ const runAction = () => {
 	if (skipBuild) {
 		log("Skipping build script because `skip_build` option is set");
 	} else {
+		if (buildScriptEnv) {
+			buildScriptEnv.split(" ").forEach((env) => {
+				const [key, value] = env.split("=");
+				setEnv(key, value);
+			});
+		}
 		log("Running the build script…");
 		if (useNpm) {
 			run(`npm run ${buildScriptName} --if-present`, pkgRoot);

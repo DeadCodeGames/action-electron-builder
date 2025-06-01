@@ -31,6 +31,10 @@ inputs:
     description: Name of the optional NPM build script which is executed before `electron-builder`
     required: false
     default: build
+  build_script_env:
+    description: The env command to set environment variables for the build script
+    required: false
+    default: ""
   skip_build:
     description: Whether the action should execute the NPM build script before running `electron-builder`
     required: false
